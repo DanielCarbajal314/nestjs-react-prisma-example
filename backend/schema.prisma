@@ -16,7 +16,7 @@ model Article {
   imageUrl  String
 }
 
-model User {
+model Contact {
   id     Int  @default(autoincrement()) @id
   name   String 
   phone  String

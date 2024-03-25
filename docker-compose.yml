@@ -31,6 +31,7 @@ services:
   api:
     build: 
       context: ./backend
+      target: dev
     env_file:
       - .env
     ports:
@@ -38,6 +39,29 @@ services:
     volumes:
       - ./backend/src:/usr/app/src
       - ./backend/test:/usr/app/test
+    depends_on:
+      migration:
+        condition: service_completed_successfully
+
+  seeding:
+    build: 
+      context: ./backend
+      target: seeding
+    env_file:
+      - .env
+    depends_on:
+      migration:
+        condition: service_completed_successfully
+
+  migration:
+    build: 
+      context: ./backend
+      target: migration
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
 
   ui:
     build: 
