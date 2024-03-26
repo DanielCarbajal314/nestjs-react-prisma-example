@@ -18,6 +18,5 @@ create-migration:
 
 generate-client:
 	docker compose exec api bash -c "npx prisma generate --schema=./schema.prisma"
-
-generate-client-local:
 	npm --prefix=./backend run build:dbclient
+	
