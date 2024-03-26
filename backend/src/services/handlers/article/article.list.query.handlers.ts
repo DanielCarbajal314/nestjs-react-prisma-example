@@ -8,6 +8,10 @@ export class ArticleListQueryHandler
   implements IQueryHandler<ArticleListQuery>
 {
   async execute(query: ArticleListQuery): Promise<ArticleResponse[]> {
-    return await this.uow.articleRepository.list(query);
+    const results = await this.uow.articleRepository.list(query);
+    return results.map(({ content, ...others }) => ({
+      ...others,
+      content: content.substring(0, 40) + '...',
+    }));
   }
 }

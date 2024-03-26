@@ -11,7 +11,7 @@ down:
 
 format:
 	docker compose exec api bash -c "npm run lint"
-	docker compose exec ui bash -c "npm run lint"
+	docker compose exec ui bash -c "npm run prettier"
 
 create-migration:
 	docker compose exec api bash -c "npx prisma migrate dev --name ${name} --schema ./schema.prisma"
